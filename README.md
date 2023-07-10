@@ -7,4 +7,5 @@ This uses /cvmfs/cms.cern.ch/SITECONF/local/storage.json to create the source of
 <pre>
 1 Change # === #== section as needed, for example, X509_USER_PROXY should be set to a proper path
 2 Change notifytowhom as needed, but keep copytowhom as is if possible.
+3 Run it from a machine with the best network capability if possible, e.g., an xrootd server machine
 </pre>
