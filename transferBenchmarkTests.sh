@@ -30,7 +30,8 @@ updown="Download"
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 [ -d $workdir ] || mkdir -p $workdir
 cd $workdir
-
+which wget 2>/dev/null 1>/dev/null || source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/current/el$(source /cvmfs/cms.cern.ch/cmsset_default.sh ; cmsos| cut -d_ -f1 | sed 's#[a-z]\|[A-Z]##g')-x86_64/setup.sh
+[ -f transferBenchmarkTests.py ] || wget -q -O transferBenchmarkTests.py https://raw.githubusercontent.com/bockjoo/transferBenchmarkTests/main/transferBenchmarkTests.py
 for r in $regions ; do
    for ipv in $ipvs ; do
     #for protocol in $protocols ; do
