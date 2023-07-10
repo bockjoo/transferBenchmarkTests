@@ -12,8 +12,13 @@ export X509_USER_PROXY=_your_voms_proxy_file_
 # ========================================================
 echo INFO checking voms proxy
 which voms-proxy-info 2>/dev/null 1>/dev/null || source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/current/el$(source /cvmfs/cms.cern.ch/cmsset_default.sh ; cmsos| cut -d_ -f1 | sed 's#[a-z]\|[A-Z]##g')-x86_64/setup.sh
-if [ $(voms-proxy-info -timeleft 2>/dev/null) -lt 3600 ] ; then
-   echo ERROR voms-proxy-info -timeleft is less than an hour
+timeleft=$(voms-proxy-info -timeleft 2>/dev/null)
+if [ $? -ne 0 ] ; then
+   echo ERROR voms-proxy-inf did not go well. Please check the variable X509_USER_PROXY in the script
+   exit 1
+fi
+if [ $timeleft -lt 3600 ] ; then
+  echo ERROR voms-proxy-info -timeleft is less than an hour
    exit 1
 fi
 copytowhom=b__empty__oc__empty__kjoo__AT__gmail__dot__com
